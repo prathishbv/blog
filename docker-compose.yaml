@@ -1,0 +1,38 @@
+version: '3.9'
+
+services:
+  django:
+    image: prathish7/blog-backend:latest
+    # build:
+    #   context: ./backend
+    #   dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    networks:
+      - app-network
+
+  react:
+    # build: 
+    #   context: ./frontend
+    #   dockerfile: Dockerfile
+    image: prathish7/blog-frontend:latest
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/html:/usr/share/nginx/html
+    depends_on:
+      - django
+      - react
+    networks:
+      - app-network
+
+networks:
+  app-network:

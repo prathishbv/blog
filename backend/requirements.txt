@@ -1,0 +1,9 @@
+django>=4.1
+djangorestframework 
+Pillow 
+django-cors-headers 
+django-summernote
+psycopg2
+psycopg2-binary
+dj-database-url
+python-decouple
